@@ -1,3 +1,13 @@
+## Google Books API integration
+
+### How to get a google api key
+
+[https://cloud.google.com/docs/authentication/api-keys]
+
+### Requred env variable
+
+GOOGLE_API_KEY=
+
 ## Available Scripts
 
 In the project directory, you can run:
