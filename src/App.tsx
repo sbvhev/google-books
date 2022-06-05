@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import debounce from "lodash.debounce";
 import { useAppDispatch } from "./app/hooks";
+import { useReadlingList } from "./state/list/hooks";
+import { addBook } from "./state/list/reducer";
 import { fetchBooks, updateQuery } from "./state/search/reducer";
 import { useBooks } from "./state/search/hooks";
 import { Book } from "./state/types";
@@ -75,6 +77,11 @@ function App() {
     }
   };
 
+  const handleSaveBook = () => {
+    if (selectedBook) {
+      dispatch(addBook(selectedBook));
+    }
+  };
 
   const debouncedChangeHandler = debounce(handleChangeQuery, 300);
 
@@ -108,7 +115,13 @@ function App() {
           Save to Reading List
         </AddButton>
       </Section>
- 
+      <Section>
+        <SectionLabel>Reading List</SectionLabel>
+        {list.map((book: Book) => (
+          <ReadingItem key={`reading-${book.id}`}>{book.title}</ReadingItem>
+        ))}
+        {!list.length && <ReadingItem>No reading list.</ReadingItem>}
+      </Section>
     </AppContainer>
   );
 }
